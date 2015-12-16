@@ -294,6 +294,8 @@ template <> struct MappingTraits<FormatStyle> {
                    Style.IndentWrappedFunctionNames);
     IO.mapOptional("IndentNestedBlocks",
                    Style.IndentNestedBlocks);
+    IO.mapOptional("AllowNewlineBeforeBlockParameter",
+                   Style.AllowNewlineBeforeBlockParameter);
     IO.mapOptional("KeepEmptyLinesAtTheStartOfBlocks",
                    Style.KeepEmptyLinesAtTheStartOfBlocks);
     IO.mapOptional("MacroBlockBegin", Style.MacroBlockBegin);
@@ -508,6 +510,7 @@ FormatStyle getLLVMStyle() {
   LLVMStyle.IndentCaseLabels = false;
   LLVMStyle.IndentWrappedFunctionNames = false;
   LLVMStyle.IndentNestedBlocks = true;
+  LLVMStyle.AllowNewlineBeforeBlockParameter = true;
   LLVMStyle.IndentWidth = 2;
   LLVMStyle.TabWidth = 8;
   LLVMStyle.MaxEmptyLinesToKeep = 1;

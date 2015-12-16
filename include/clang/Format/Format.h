@@ -413,6 +413,9 @@ struct FormatStyle {
   /// \brief If true, indent nested blocks to the start of the nested function call
   bool IndentNestedBlocks;
 
+  /// \brief If true, allow newlines before block parameters when ColumnLimit is 0.
+  bool AllowNewlineBeforeBlockParameter;
+
   /// \brief If true, empty lines at the start of blocks are kept.
   bool KeepEmptyLinesAtTheStartOfBlocks;
 
@@ -637,6 +640,7 @@ struct FormatStyle {
            IndentWidth == R.IndentWidth && Language == R.Language &&
            IndentWrappedFunctionNames == R.IndentWrappedFunctionNames &&
            IndentNestedBlocks == R.IndentNestedBlocks &&
+           AllowNewlineBeforeBlockParameter == R.AllowNewlineBeforeBlockParameter &&
            KeepEmptyLinesAtTheStartOfBlocks ==
                R.KeepEmptyLinesAtTheStartOfBlocks &&
            MacroBlockBegin == R.MacroBlockBegin &&

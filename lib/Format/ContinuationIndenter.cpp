@@ -934,7 +934,7 @@ void ContinuationIndenter::moveStatePastScopeOpener(LineState &State,
         if (getLengthToMatchingParen(Current) + State.Column >
             getColumnLimit(State))
           BreakBeforeParameter = true;
-      } else {
+      } else if (Style.AllowNewlineBeforeBlockParameter) {
         // For ColumnLimit = 0, we have to figure out whether there is or has to
         // be a line break within this call.
         for (const FormatToken *Tok = &Current;
