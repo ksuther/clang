@@ -410,6 +410,9 @@ struct FormatStyle {
   /// type.
   bool IndentWrappedFunctionNames;
 
+  /// \brief If true, indent nested blocks to the start of the nested function call
+  bool IndentNestedBlocks;
+
   /// \brief If true, empty lines at the start of blocks are kept.
   bool KeepEmptyLinesAtTheStartOfBlocks;
 
@@ -633,6 +636,7 @@ struct FormatStyle {
            IndentCaseLabels == R.IndentCaseLabels &&
            IndentWidth == R.IndentWidth && Language == R.Language &&
            IndentWrappedFunctionNames == R.IndentWrappedFunctionNames &&
+           IndentNestedBlocks == R.IndentNestedBlocks &&
            KeepEmptyLinesAtTheStartOfBlocks ==
                R.KeepEmptyLinesAtTheStartOfBlocks &&
            MacroBlockBegin == R.MacroBlockBegin &&

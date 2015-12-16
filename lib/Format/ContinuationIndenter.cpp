@@ -882,8 +882,13 @@ void ContinuationIndenter::moveStatePastScopeOpener(LineState &State,
   unsigned LastSpace = State.Stack.back().LastSpace;
   bool AvoidBinPacking;
   bool BreakBeforeParameter = false;
-  unsigned NestedBlockIndent = std::max(State.Stack.back().StartOfFunctionCall,
-                                        State.Stack.back().NestedBlockIndent);
+  unsigned NestedBlockIndent;
+  if (Style.IndentNestedBlocks) {
+    NestedBlockIndent = std::max(State.Stack.back().StartOfFunctionCall,
+                                 State.Stack.back().NestedBlockIndent);
+  } else {
+    NestedBlockIndent = State.Stack.back().NestedBlockIndent;
+  }
   if (Current.isOneOf(tok::l_brace, TT_ArrayInitializerLSquare)) {
     if (Current.opensBlockOrBlockTypeList(Style)) {
       NewIndent = State.Stack.back().NestedBlockIndent + Style.IndentWidth;

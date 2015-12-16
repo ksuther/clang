@@ -292,6 +292,8 @@ template <> struct MappingTraits<FormatStyle> {
     IO.mapOptional("IndentWidth", Style.IndentWidth);
     IO.mapOptional("IndentWrappedFunctionNames",
                    Style.IndentWrappedFunctionNames);
+    IO.mapOptional("IndentNestedBlocks",
+                   Style.IndentNestedBlocks);
     IO.mapOptional("KeepEmptyLinesAtTheStartOfBlocks",
                    Style.KeepEmptyLinesAtTheStartOfBlocks);
     IO.mapOptional("MacroBlockBegin", Style.MacroBlockBegin);
@@ -505,6 +507,7 @@ FormatStyle getLLVMStyle() {
                                  {".*", 1}};
   LLVMStyle.IndentCaseLabels = false;
   LLVMStyle.IndentWrappedFunctionNames = false;
+  LLVMStyle.IndentNestedBlocks = true;
   LLVMStyle.IndentWidth = 2;
   LLVMStyle.TabWidth = 8;
   LLVMStyle.MaxEmptyLinesToKeep = 1;
