@@ -165,9 +165,6 @@ bool ContinuationIndenter::mustBreak(const LineState &State) {
       ((Style.AllowShortFunctionsOnASingleLine != FormatStyle::SFS_All) ||
        Style.BreakConstructorInitializersBeforeComma || Style.ColumnLimit != 0))
     return true;
-  if (Current.is(TT_SelectorName) && State.Stack.back().ObjCSelectorNameFound &&
-      State.Stack.back().BreakBeforeParameter)
-    return true;
 
   unsigned NewLineColumn = getNewLineColumn(State);
   if (State.Column < NewLineColumn)
@@ -215,6 +212,9 @@ bool ContinuationIndenter::mustBreak(const LineState &State) {
       State.Stack.back().FirstLessLess == 0)
     return true;
 
+  if (Current.is(TT_SelectorName) && State.Stack.back().ObjCSelectorNameFound &&
+      State.Stack.back().BreakBeforeParameter)
+    return true;
   if (Current.NestingLevel == 0 && !Current.isTrailingComment()) {
     // Always break after "template <...>" and leading annotations. This is only
     // for cases where the entire line does not fit on a single line as a
