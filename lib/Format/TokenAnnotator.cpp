@@ -955,12 +955,17 @@ private:
       if (Current.MatchingParen && Current.Next &&
           !Current.Next->isBinaryOperator() &&
           !Current.Next->isOneOf(tok::semi, tok::colon, tok::l_brace))
-        if (FormatToken *BeforeParen = Current.MatchingParen->Previous)
-          if (BeforeParen->is(tok::identifier) &&
-              BeforeParen->TokenText == BeforeParen->TokenText.upper() &&
-              (!BeforeParen->Previous ||
-               BeforeParen->Previous->ClosesTemplateDeclaration))
-            Current.Type = TT_FunctionAnnotationRParen;
+        if (FormatToken *AfterParen = Current.MatchingParen->Next) {
+          // Make sure this isn't the return type of an Obj-C block declaration
+          if (AfterParen->Tok.isNot(tok::caret)) {
+            if (FormatToken *BeforeParen = Current.MatchingParen->Previous)
+              if (BeforeParen->is(tok::identifier) &&
+                  BeforeParen->TokenText == BeforeParen->TokenText.upper() &&
+                  (!BeforeParen->Previous ||
+                   BeforeParen->Previous->ClosesTemplateDeclaration))
+                Current.Type = TT_FunctionAnnotationRParen;
+          }
+        }
     } else if (Current.is(tok::at) && Current.Next) {
       if (Current.Next->isStringLiteral()) {
         Current.Type = TT_ObjCStringLiteral;
